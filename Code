@@ -1,0 +1,69 @@
+class TumpukanPiring:
+    def __init__(self):
+        self.stack = []
+
+    def push(self, piring):
+        self.stack.append(piring)
+        print(f">>> Piring '{piring}' ditambahkan ke tumpukan.")
+
+    def pop(self):
+        if self.is_empty():
+            print("!!! Tumpukan kosong. Tidak ada piring yang bisa diambil.")
+        else:
+            piring = self.stack.pop()
+            print(f">>> Piring '{piring}' diambil dari tumpukan.")
+
+    def peek(self):
+        if self.is_empty():
+            print("!!! Tumpukan kosong. Tidak ada piring teratas.")
+        else:
+            print(f">>> Piring teratas saat ini: '{self.stack[-1]}'")
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def display(self):
+        print("\n=== TUMPUKAN PIRING SAAT INI ===")
+        if self.is_empty():
+            print("[Kosong]")
+        else:
+            for i, p in enumerate(reversed(self.stack), 1):
+                print(f"{i}. {p}")
+        print("===============================\n")
+
+
+# Fungsi menu interaktif
+def menu():
+    tumpukan = TumpukanPiring()
+    while True:
+        print("\n--- MENU TUMPUKAN PIRING ---")
+        print("1. Tambah Piring (Push)")
+        print("2. Ambil Piring (Pop)")
+        print("3. Lihat Piring Teratas (Peek)")
+        print("4. Cek Apakah Tumpukan Kosong (Is Empty)")
+        print("5. Tampilkan Semua Piring (Display)")
+        print("6. Keluar")
+        pilihan = input("Pilih menu (1-6): ")
+
+        print("\n-----------------------------")
+        if pilihan == "1":
+            nama = input("Masukkan nama piring: ")
+            tumpukan.push(nama)
+        elif pilihan == "2":
+            tumpukan.pop()
+        elif pilihan == "3":
+            tumpukan.peek()
+        elif pilihan == "4":
+            print(">>> Tumpukan kosong." if tumpukan.is_empty() else ">>> Masih ada piring dalam tumpukan.")
+        elif pilihan == "5":
+            tumpukan.display()
+        elif pilihan == "6":
+            print("Terima kasih! Program selesai.")
+            break
+        else:
+            print("!!! Pilihan tidak valid. Silakan pilih antara 1 - 6.")
+        print("-----------------------------")
+
+
+# Jalankan program
+menu()
