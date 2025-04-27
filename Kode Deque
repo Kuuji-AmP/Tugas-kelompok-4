@@ -1,0 +1,99 @@
+from collections import deque
+
+class TumpukanPiringDeque:
+    def __init__(self):
+        self.deque_piring = deque()
+
+    def push_right(self, piring):
+        self.deque_piring.append(piring)
+        print(f">>> Piring '{piring}' ditambahkan ke BELAKANG tumpukan.")
+
+    def push_left(self, piring):
+        self.deque_piring.appendleft(piring)
+        print(f">>> Piring '{piring}' ditambahkan ke DEPAN tumpukan.")
+
+    def pop_right(self):
+        if self.is_empty():
+            print("!!! Tumpukan kosong. Tidak ada piring di belakang yang bisa diambil.")
+        else:
+            piring = self.deque_piring.pop()
+            print(f">>> Piring '{piring}' diambil dari BELAKANG tumpukan.")
+
+    def pop_left(self):
+        if self.is_empty():
+            print("!!! Tumpukan kosong. Tidak ada piring di depan yang bisa diambil.")
+        else:
+            piring = self.deque_piring.popleft()
+            print(f">>> Piring '{piring}' diambil dari DEPAN tumpukan.")
+
+    def peek_right(self):
+        if self.is_empty():
+            print("!!! Tumpukan kosong. Tidak ada piring di belakang.")
+        else:
+            print(f">>> Piring di BELAKANG saat ini: '{self.deque_piring[-1]}'")
+
+    def peek_left(self):
+        if self.is_empty():
+            print("!!! Tumpukan kosong. Tidak ada piring di depan.")
+        else:
+            print(f">>> Piring di DEPAN saat ini: '{self.deque_piring[0]}'")
+
+    def is_empty(self):
+        return len(self.deque_piring) == 0
+
+    def display(self):
+        print("\n=== TUMPUKAN PIRING SAAT INI ===")
+        if self.is_empty():
+            print("[Kosong]")
+        else:
+            print("Dari DEPAN ➡️ ke BELAKANG:")
+            for i, p in enumerate(self.deque_piring, 1):
+                print(f"{i}. {p}")
+        print("===============================\n")
+
+
+# Fungsi menu interaktif
+def menu():
+    tumpukan = TumpukanPiringDeque()
+    while True:
+        print("\n--- MENU TUMPUKAN PIRING (DEQUE) ---")
+        print("1. Tambah Piring ke BELAKANG (Push Right)")
+        print("2. Tambah Piring ke DEPAN (Push Left)")
+        print("3. Ambil Piring dari BELAKANG (Pop Right)")
+        print("4. Ambil Piring dari DEPAN (Pop Left)")
+        print("5. Lihat Piring di BELAKANG (Peek Right)")
+        print("6. Lihat Piring di DEPAN (Peek Left)")
+        print("7. Cek Apakah Tumpukan Kosong (Is Empty)")
+        print("8. Tampilkan Semua Piring (Display)")
+        print("9. Keluar")
+        pilihan = input("Pilih menu (1-9): ")
+
+        print("\n-----------------------------")
+        if pilihan == "1":
+            nama = input("Masukkan nama piring: ")
+            tumpukan.push_right(nama)
+        elif pilihan == "2":
+            nama = input("Masukkan nama piring: ")
+            tumpukan.push_left(nama)
+        elif pilihan == "3":
+            tumpukan.pop_right()
+        elif pilihan == "4":
+            tumpukan.pop_left()
+        elif pilihan == "5":
+            tumpukan.peek_right()
+        elif pilihan == "6":
+            tumpukan.peek_left()
+        elif pilihan == "7":
+            print(">>> Tumpukan kosong." if tumpukan.is_empty() else ">>> Masih ada piring dalam tumpukan.")
+        elif pilihan == "8":
+            tumpukan.display()
+        elif pilihan == "9":
+            print("Terima kasih! Program selesai.")
+            break
+        else:
+            print("!!! Pilihan tidak valid. Silakan pilih antara 1 - 9.")
+        print("-----------------------------")
+
+
+# Jalankan program
+menu()
